@@ -1,0 +1,100 @@
+Apple,Fruit,Red,Sweet,Tree,Kitchen
+Banana,Fruit,Yellow,Sweet,Peel,Tropical
+Strawberry,Fruit,Red,Sweet,Berry,Summer
+Watermelon,Fruit,Green,Sweet,Summer,Large
+Orange,Fruit,Orange,Sweet,Citrus,Juice
+Lemon,Fruit,Yellow,Sour,Citrus,Kitchen
+Grape,Fruit,Purple,Sweet,Berry,Vine
+Pineapple,Fruit,Yellow,Sweet,Tropical,Spiky
+Peach,Fruit,Orange,Sweet,Tree,Soft
+Blueberry,Fruit,Blue,Sweet,Berry,Small
+Laptop,Tech,Screen,Office,Portable,Keyboard
+Smartphone,Tech,Screen,Pocket,Portable,Call
+Television,Tech,Screen,Living Room,Show,Large
+Headphones,Tech,Sound,Audio,Portable,Music
+Smartwatch,Tech,Screen,Wrist,Portable,Time
+Keyboard,Tech,Office,Button,Writing,Plastic
+Camera,Tech,Lens,Memory,Portable,Picture
+Microphone,Tech,Sound,Audio,Recording,Voice
+Speaker,Tech,Sound,Audio,Living Room,Music
+Tablet,Tech,Screen,Portable,Game,Flat
+Coffee,Drink,Hot,Liquid,Morning,Bitter
+Tea,Drink,Hot,Liquid,Morning,Leaf
+Milk,Drink,Cold,Liquid,Morning,White
+Water,Drink,Cold,Liquid,Clear,Natural
+Beer,Drink,Cold,Liquid,Alcohol,Glass
+Wine,Drink,Cold,Liquid,Alcohol,Fruit
+Soda,Drink,Cold,Liquid,Sweet,Bubbles
+Juice,Drink,Cold,Liquid,Sweet,Fruit
+Hot Chocolate,Drink,Hot,Liquid,Sweet,Winter
+Smoothie,Drink,Cold,Liquid,Sweet,Fruit
+Pizza,Food,Hot,Cheese,Dinner,Italian
+Burger,Food,Hot,Meat,Dinner,Bread
+Pasta,Food,Hot,Carb,Dinner,Italian
+Sushi,Food,Cold,Fish,Dinner,Rice
+Taco,Food,Hot,Meat,Dinner,Spicy
+Salad,Food,Cold,Green,Healthy,Vegetable
+Soup,Food,Hot,Liquid,Dinner,Bowl
+Steak,Food,Hot,Meat,Dinner,Expensive
+Fries,Food,Hot,Carb,Side,Potato
+Sandwich,Food,Cold,Bread,Lunch,Easy
+Dog,Animal,Pet,Four Legs,Furry,Loyal
+Cat,Animal,Pet,Four Legs,Furry,Independent
+Lion,Animal,Wild,Four Legs,Furry,Cat
+Tiger,Animal,Wild,Four Legs,Furry,Stripes
+Elephant,Animal,Wild,Four Legs,Grey,Large
+Giraffe,Animal,Wild,Four Legs,Yellow,Tall
+Monkey,Animal,Wild,Tree,Furry,Climb
+Rabbit,Animal,Pet,Four Legs,Furry,Hop
+Hamster,Animal,Pet,Small,Furry,Cage
+Horse,Animal,Four Legs,Ride,Farm,Large
+Eagle,Bird,Flying,Wild,Feather,Sharp
+Penguin,Bird,Cold,Cold,Feather,Swim
+Owl,Bird,Flying,Wild,Feather,Night
+Parrot,Bird,Flying,Pet,Feather,Colorful
+Pigeon,Bird,Flying,City,Feather,Grey
+Car,Vehicle,Road,Engine,Four Wheels,Metal
+Bicycle,Vehicle,Road,Pedal,Two Wheels,Metal
+Motorcycle,Vehicle,Road,Engine,Two Wheels,Metal
+Train,Vehicle,Track,Engine,Large,Metal
+Airplane,Vehicle,Flying,Engine,Large,Metal
+Helicopter,Vehicle,Flying,Engine,Rotors,Metal
+Boat,Vehicle,Water,Float,Engine,Metal
+Submarine,Vehicle,Water,Deep,Engine,Metal
+Bus,Vehicle,Road,Engine,Large,Public
+Truck,Vehicle,Road,Engine,Large,Cargo
+Guitar,Instrument,Music,Strings,Wood,Play
+Piano,Instrument,Music,Keys,Wood,Large
+Drums,Instrument,Music,Beat,Loud,Play
+Violin,Instrument,Music,Strings,Wood,Bow
+Flute,Instrument,Music,Wind,Silver,Small
+Trumpet,Instrument,Music,Wind,Brass,Loud
+Harp,Instrument,Music,Strings,Large,Wood
+Accordion,Instrument,Music,Keys,Squeeze,Portable
+Saxophone,Instrument,Music,Wind,Brass,Jazz
+Ukulele,Instrument,Music,Strings,Wood,Small
+Soccer,Sport,Ball,Team,Outdoor,Foot
+Basketball,Sport,Ball,Team,Indoor,Hoop
+Tennis,Sport,Ball,Two Players,Outdoor,Racket
+Baseball,Sport,Ball,Team,Outdoor,Bat
+Golf,Sport,Ball,Individual,Outdoor,Club
+Volleyball,Sport,Ball,Team,Net,Hands
+Hockey,Sport,Ice,Team,Cold,Stick
+Football,Sport,Ball,Team,Outdoor,Helmet
+Rugby,Sport,Ball,Team,Outdoor,Tough
+Badminton,Sport,Racket,Two Players,Indoor,Net
+Desk,Furniture,Wood,Office,Table,Work
+Chair,Furniture,Wood,Sit,Office,Legs
+Bed,Furniture,Soft,Sleep,Bedroom,Large
+Couch,Furniture,Soft,Sit,Living Room,Large
+Table,Furniture,Wood,Eat,Legs,Kitchen
+Wardrobe,Furniture,Wood,Clothes,Bedroom,Large
+Bookshelf,Furniture,Wood,Books,Storage,Living Room
+Cabinet,Furniture,Wood,Kitchen,Storage,Cup
+Drawer,Furniture,Wood,Storage,Slide,Desk
+Stool,Furniture,Wood,Sit,Kitchen,Tall
+Ice Cream,Food,Cold,Sweet,Dairy,Dessert
+Cake,Food,Sweet,Baked,Celebration,Dessert
+Cookie,Food,Sweet,Baked,Small,Dessert
+Cupcake,Food,Sweet,Baked,Small,Frosting
+Donut,Food,Sweet,Baked,Small,Ring
