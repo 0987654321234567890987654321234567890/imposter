@@ -81,13 +81,24 @@ class _GameScreenState extends State<GameScreen> {
     widget.wordList,
   );
 
+  bool showingPlayerStart = false;
+
   int currentIndex = 0;
   int turnCount = 0;
 
+  final random = Random();
+  late int startingPlayer = random.nextInt(players.length);
+  late String startingPlayerName = players[startingPlayer].name;
+
   void _nextPlayer() {
     setState(() {
-      currentIndex = (currentIndex + 1) % players.length;
-      turnCount++;
+      if ((turnCount + 1) % players.length == 0 && !showingPlayerStart) {
+        showingPlayerStart = true;
+      } else {
+        currentIndex = (currentIndex + 1) % players.length;
+        turnCount++;
+        showingPlayerStart = false;
+      }
     });
   }
 
@@ -96,24 +107,70 @@ class _GameScreenState extends State<GameScreen> {
     final current = players[currentIndex];
     final currentColor = cardColors[turnCount % cardColors.length];
 
+    String buttonText = "Next Player";
+    if (showingPlayerStart) buttonText = "Revisit Words";
+
     return Scaffold(
       appBar: AppBar(title: const Text('Imposter Game')),
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Text(
-              '${current.name}\'s turn',
-              style: const TextStyle(fontSize: 40),
-            ),
-            const SizedBox(height: 24),
-            FlipCard(
-              key: ValueKey(currentIndex),
-              label: current.label,
-              hint: current.hint,
-              color: currentColor,
-            ),
-            const SizedBox(height: 24),
+            if (!showingPlayerStart)
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 300,
+                    height: 100,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: SizedBox(
+                        width: 300,
+                        child: Text(
+                          '${current.name}\'s turn',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(fontSize: 40),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  FlipCard(
+                    key: ValueKey(currentIndex),
+                    label: current.label,
+                    hint: current.hint,
+                    color: currentColor,
+                  ),
+                  const SizedBox(height: 24),
+                ],
+              )
+            else
+              Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    width: 300,
+                    height: 400,
+                    child: FittedBox(
+                      fit: BoxFit.scaleDown,
+                      child: SizedBox(
+                        width: 300,
+                        child: Text(
+                          '$startingPlayerName starts the conversation!',
+                          textAlign: TextAlign.center,
+                          style: const TextStyle(
+                            fontSize: 40,
+                            fontWeight: FontWeight.w900,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+
+                  const SizedBox(height: 80),
+                ],
+              ),
             ElevatedButton(
               onPressed: _nextPlayer,
               style: ElevatedButton.styleFrom(
@@ -122,7 +179,7 @@ class _GameScreenState extends State<GameScreen> {
                   vertical: 16,
                 ),
               ),
-              child: const Text('Next Player', style: TextStyle(fontSize: 30)),
+              child: Text(buttonText, style: TextStyle(fontSize: 30)),
             ),
           ],
         ),

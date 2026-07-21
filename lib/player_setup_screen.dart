@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'game_screen.dart';
 
+const int nameCharLimit = 20;
+
 class PlayerSetupScreen extends StatefulWidget {
   const PlayerSetupScreen({super.key});
 
@@ -17,6 +19,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
   void _addName() {
     final name = _controller.text.trim();
     if (name.isEmpty) return;
+    if (name.length > nameCharLimit) return;
 
     setState(() {
       names.add(name);
@@ -79,6 +82,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
                 Expanded(
                   child: TextField(
                     controller: _controller,
+                    maxLength: nameCharLimit,
                     decoration: const InputDecoration(
                       labelText: 'Player name',
                       border: OutlineInputBorder(),
