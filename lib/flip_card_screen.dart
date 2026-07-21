@@ -47,7 +47,7 @@ class _FlipCardState extends State<FlipCard>
       fw = FontWeight.w900;
       bc = Colors.transparent;
     } else if (label == 'IMPOSTER') {
-      fSize = 35;
+      fSize = 25;
       c = const Color.fromARGB(255, 230, 26, 26);
       fw = FontWeight.w900;
     }
