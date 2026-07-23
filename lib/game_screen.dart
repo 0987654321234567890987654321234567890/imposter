@@ -40,15 +40,21 @@ final List<Color> cardColors = [
   teal,
 ];
 
-List<Player> generatePlayers(List<String> names, List<WordEntry> wordList) {
+List<Player> generatePlayers(
+  List<String> names,
+  List<WordEntry> wordList,
+  int imposterCount,
+) {
   final random = Random();
   final word = wordList[random.nextInt(wordList.length)];
-  final imposterIndex = random.nextInt(names.length);
+
+  final allIndices = List.generate(names.length, (i) => i)..shuffle(random);
+  final imposterIndices = allIndices.take(imposterCount).toSet();
 
   return List.generate(names.length, (i) {
     return Player(
       name: names[i],
-      label: i == imposterIndex ? 'IMPOSTER' : word.word,
+      label: imposterIndices.contains(i) ? 'IMPOSTER' : word.word,
       hint: word.hints[random.nextInt(word.hints.length)],
     );
   });
@@ -65,10 +71,12 @@ class Player {
 class GameScreen extends StatefulWidget {
   final List<String> playerNames;
   final List<WordEntry> wordList;
+  final int imposterCount;
   const GameScreen({
     super.key,
     required this.playerNames,
     required this.wordList,
+    required this.imposterCount,
   });
 
   @override
@@ -79,6 +87,7 @@ class _GameScreenState extends State<GameScreen> {
   late final List<Player> players = generatePlayers(
     widget.playerNames,
     widget.wordList,
+    widget.imposterCount,
   );
 
   bool showingPlayerStart = false;

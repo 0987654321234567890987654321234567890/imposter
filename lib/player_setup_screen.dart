@@ -15,6 +15,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
   final List<String> names = [];
   final List<Key> _keys = [];
   bool _isLoading = false;
+  int imposterCount = 1;
 
   void _addName() {
     final name = _controller.text.trim();
@@ -53,8 +54,11 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
       Navigator.push(
         context,
         MaterialPageRoute(
-          builder: (context) =>
-              GameScreen(playerNames: names, wordList: wordList),
+          builder: (context) => GameScreen(
+            playerNames: names,
+            wordList: wordList,
+            imposterCount: imposterCount,
+          ),
         ),
       );
     } finally {
@@ -122,6 +126,35 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
                 },
               ),
             ),
+
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Imposters:', style: TextStyle(fontSize: 18)),
+                const SizedBox(width: 12),
+                IconButton(
+                  icon: const Icon(Icons.remove),
+                  onPressed: imposterCount > 1
+                      ? () => setState(() => imposterCount--)
+                      : null,
+                ),
+                Text(
+                  '$imposterCount',
+                  style: const TextStyle(
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.add),
+                  onPressed: imposterCount < names.length - 2
+                      ? () => setState(() => imposterCount++)
+                      : null,
+                ),
+              ],
+            ),
+
+            const SizedBox(height: 8),
 
             // start button
             SizedBox(
