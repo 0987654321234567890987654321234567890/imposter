@@ -33,6 +33,11 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
     setState(() {
       names.removeAt(index);
       _keys.removeAt(index);
+
+      final maxImposters = names.length - 2;
+      if (imposterCount > maxImposters) {
+        imposterCount = maxImposters < 1 ? 1 : maxImposters;
+      }
     });
   }
 
