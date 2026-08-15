@@ -3,6 +3,8 @@ import 'game_screen.dart';
 
 const int nameCharLimit = 20;
 
+bool trollModeEnabled = false;
+
 class PlayerSetupScreen extends StatefulWidget {
   const PlayerSetupScreen({super.key});
 
@@ -63,6 +65,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
             playerNames: names,
             wordList: wordList,
             imposterCount: imposterCount,
+            trollModeEnabled: trollModeEnabled,
           ),
         ),
       );
@@ -160,6 +163,13 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
             ),
 
             const SizedBox(height: 8),
+
+            SwitchListTile(
+              title: const Text('Troll Mode'),
+              subtitle: const Text('Rare chance no one is the imposter'),
+              value: trollModeEnabled,
+              onChanged: (value) => setState(() => trollModeEnabled = value),
+            ),
 
             // start button
             SizedBox(

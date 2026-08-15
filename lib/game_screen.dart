@@ -46,9 +46,18 @@ List<Player> generatePlayers(
   List<String> names,
   List<WordEntry> wordList,
   int imposterCount,
+  bool trollModeEnabled,
 ) {
   final random = Random();
   final word = wordList[random.nextInt(wordList.length)];
+
+  final isTrollRound = trollModeEnabled && random.nextInt(15) == 0;
+
+  if (isTrollRound) {
+    return List.generate(names.length, (i) {
+      return Player(name: names[i], label: word.word, hint: '');
+    });
+  }
 
   final allIndices = List.generate(names.length, (i) => i)..shuffle(random);
   final imposterIndices = allIndices.take(imposterCount).toSet();
@@ -74,11 +83,13 @@ class GameScreen extends StatefulWidget {
   final List<String> playerNames;
   final List<WordEntry> wordList;
   final int imposterCount;
+  final bool trollModeEnabled;
   const GameScreen({
     super.key,
     required this.playerNames,
     required this.wordList,
     required this.imposterCount,
+    required this.trollModeEnabled,
   });
 
   @override
@@ -90,6 +101,7 @@ class _GameScreenState extends State<GameScreen> {
     widget.playerNames,
     widget.wordList,
     widget.imposterCount,
+    widget.trollModeEnabled,
   );
 
   bool showingPlayerStart = false;
