@@ -6,7 +6,9 @@ import 'package:flutter/services.dart';
 import 'package:csv/csv.dart';
 
 Future<List<WordEntry>> loadWordList() async {
-  final rawCsv = await rootBundle.loadString('lib/assets/words.csv');
+  final rawCsv = await rootBundle.loadString(
+    'lib/assets/imposter_words_v2.csv',
+  );
   final rows = csv.decode(rawCsv);
 
   return rows.map((row) {
