@@ -34,12 +34,12 @@ class WordEntry {
 }
 
 final List<Color> cardColors = [
-  Colors.yellow,
-  Colors.blue,
-  Colors.orange,
-  Colors.green,
-  pink,
-  teal,
+  const Color(0xFF2C6E5C), // your accentGreen
+  const Color(0xFF3D5A6C), // muted steel blue
+  const Color(0xFFB8860B), // muted amber/gold
+  const Color(0xFF6B5B95), // muted plum
+  const Color(0xFF8A8578), // your mutedGrey
+  const Color(0xFFC4392B), // your accentRed
 ];
 
 List<Player> generatePlayers(

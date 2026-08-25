@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'game_screen.dart';
+import 'main.dart';
 
 const int nameCharLimit = 20;
 
@@ -46,7 +47,10 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
   Future<void> _startGame() async {
     if (names.length < 3) {
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Add at least 3 players to start!')),
+        const SnackBar(
+          content: Text('Add at least 3 players to start!'),
+          duration: Duration(seconds: 2),
+        ),
       );
       return;
     }
@@ -60,8 +64,8 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
 
       Navigator.push(
         context,
-        MaterialPageRoute(
-          builder: (context) => GameScreen(
+        _buildRoute(
+          GameScreen(
             playerNames: names,
             wordList: wordList,
             imposterCount: imposterCount,
@@ -88,18 +92,29 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            // input row: text field + add button
+            //add players box
             Row(
               children: [
                 Expanded(
                   child: TextField(
                     controller: _controller,
                     maxLength: nameCharLimit,
+                    style: const TextStyle(color: Colors.white),
                     decoration: const InputDecoration(
                       labelText: 'Player name',
-                      border: OutlineInputBorder(),
+                      labelStyle: TextStyle(color: mutedGrey),
+                      enabledBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: mutedGrey,
+                        ), // border when not focused
+                      ),
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(
+                          color: accentRed,
+                        ), // border when tapped/focused
+                      ),
                     ),
-                    onSubmitted: (_) => _addName(), // lets them hit enter/done
+                    onSubmitted: (_) => _addName(),
                   ),
                 ),
                 const SizedBox(width: 8),
@@ -108,7 +123,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
             ),
             const SizedBox(height: 16),
 
-            // list of added players
+            //player list
             Expanded(
               child: ReorderableListView.builder(
                 itemCount: names.length,
@@ -123,10 +138,14 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
                 itemBuilder: (context, index) {
                   return Card(
                     key: _keys[index],
+                    color: surfaceWhite,
                     child: ListTile(
-                      title: Text(names[index]),
+                      title: Text(
+                        names[index],
+                        style: const TextStyle(color: bgCharcoal),
+                      ),
                       trailing: IconButton(
-                        icon: const Icon(Icons.delete, color: Colors.red),
+                        icon: const Icon(Icons.delete, color: accentRed),
                         onPressed: () => _removeName(index),
                       ),
                     ),
@@ -135,13 +154,17 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
               ),
             ),
 
+            //imposter number selection
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text('Imposters:', style: TextStyle(fontSize: 18)),
+                const Text(
+                  'Imposters:',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
                 const SizedBox(width: 12),
                 IconButton(
-                  icon: const Icon(Icons.remove),
+                  icon: const Icon(Icons.remove, color: Colors.white),
                   onPressed: imposterCount > 1
                       ? () => setState(() => imposterCount--)
                       : null,
@@ -151,10 +174,11 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
                 IconButton(
-                  icon: const Icon(Icons.add),
+                  icon: const Icon(Icons.add, color: Colors.white),
                   onPressed: imposterCount < names.length - 2
                       ? () => setState(() => imposterCount++)
                       : null,
@@ -164,22 +188,39 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
 
             const SizedBox(height: 8),
 
+            //troll mode switch
             SwitchListTile(
-              title: const Text('Troll Mode'),
-              subtitle: const Text('Rare chance no one is the imposter'),
+              title: const Text(
+                'Troll Mode',
+                style: TextStyle(color: Colors.white),
+              ),
+              subtitle: const Text(
+                'Rare chance no one is the imposter',
+                style: TextStyle(color: mutedGrey),
+              ),
               value: trollModeEnabled,
+              activeThumbColor: accentRed,
+              activeTrackColor: accentRed.withValues(alpha: 0.4),
+              inactiveThumbColor: mutedGrey,
+              inactiveTrackColor: bgCharcoal.withValues(alpha: 0.4),
               onChanged: (value) => setState(() => trollModeEnabled = value),
             ),
 
-            // start button
+            //start game button
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 onPressed: _isLoading ? null : _startGame,
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 16),
-                ),
-                child: const Text('Start Game', style: TextStyle(fontSize: 20)),
+                child: _isLoading
+                    ? const SizedBox(
+                        height: 20,
+                        width: 20,
+                        child: CircularProgressIndicator(
+                          strokeWidth: 2,
+                          color: Colors.white,
+                        ),
+                      )
+                    : const Text('Start Game'),
               ),
             ),
           ],
@@ -187,4 +228,24 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
       ),
     );
   }
+}
+
+Route _buildRoute(Widget page) {
+  return PageRouteBuilder(
+    pageBuilder: (context, animation, secondaryAnimation) => page,
+    transitionDuration: const Duration(milliseconds: 180),
+    reverseTransitionDuration: const Duration(milliseconds: 150),
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      final fade = CurvedAnimation(parent: animation, curve: Curves.easeOut);
+      final slide = Tween<Offset>(
+        begin: const Offset(0, 0.03),
+        end: Offset.zero,
+      ).animate(fade);
+
+      return FadeTransition(
+        opacity: fade,
+        child: SlideTransition(position: slide, child: child),
+      );
+    },
+  );
 }
