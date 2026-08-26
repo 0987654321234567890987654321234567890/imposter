@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'player_setup_screen.dart';
+import 'about_screen.dart';
 
 const Color bgCharcoal = Color(0xFF1A1A1E);
 const Color surfaceWhite = Color(0xFFF4EFE3);
@@ -77,47 +78,63 @@ class StartScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            const Icon(Icons.person_search, size: 90, color: mutedGrey),
-            const Text(
-              'IMPOSTER',
-              style: TextStyle(
-                fontSize: 64,
-                fontWeight: FontWeight.w800,
-                color: Colors.white,
-                letterSpacing: -0.5,
-              ),
-            ),
-            const SizedBox(height: 12),
-            const Text(
-              'Who\'s lying?',
-              style: TextStyle(fontSize: 22, color: Colors.white70),
-            ),
-            const SizedBox(height: 60),
-            SizedBox(
-              width: 260,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.push(
-                    context,
-                    _buildRoute(const PlayerSetupScreen()),
-                  );
-                },
-                style: ElevatedButton.styleFrom(
-                  padding: const EdgeInsets.symmetric(vertical: 22),
-                  textStyle: const TextStyle(
-                    fontSize: 22,
-                    fontWeight: FontWeight.w700,
+      body: Stack(
+        children: [
+          Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Icon(Icons.person_search, size: 90, color: mutedGrey),
+                const Text(
+                  'IMPOSTER',
+                  style: TextStyle(
+                    fontSize: 64,
+                    fontWeight: FontWeight.w800,
+                    color: Colors.white,
+                    letterSpacing: -0.5,
                   ),
                 ),
-                child: const Text('PLAY'),
+                const SizedBox(height: 12),
+                const Text(
+                  'Who\'s lying?',
+                  style: TextStyle(fontSize: 22, color: Colors.white70),
+                ),
+                const SizedBox(height: 60),
+                SizedBox(
+                  width: 260,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        _buildRoute(const PlayerSetupScreen()),
+                      );
+                    },
+                    style: ElevatedButton.styleFrom(
+                      padding: const EdgeInsets.symmetric(vertical: 22),
+                      textStyle: const TextStyle(
+                        fontSize: 22,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    child: const Text('PLAY'),
+                  ),
+                ),
+              ],
+            ),
+          ),
+          Positioned(
+            top: 16,
+            right: 16,
+            child: SafeArea(
+              child: IconButton(
+                icon: const Icon(Icons.info_outline, color: mutedGrey),
+                onPressed: () {
+                  Navigator.push(context, _buildRoute(const AboutScreen()));
+                },
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
