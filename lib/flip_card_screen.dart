@@ -41,6 +41,7 @@ class _FlipCardState extends State<FlipCard>
   Widget _buildFrontFace(Color color) {
     final textColor = _textColorForBackground(color);
 
+    //actual front of the card
     return Container(
       width: 220,
       height: 320,
@@ -56,6 +57,7 @@ class _FlipCardState extends State<FlipCard>
         ],
       ),
       alignment: Alignment.center,
+      //'tap to reveal' text at front
       child: Text(
         'TAP TO REVEAL',
         textAlign: TextAlign.center,
@@ -75,6 +77,7 @@ class _FlipCardState extends State<FlipCard>
     Color color,
   ) {
     final theme = Theme.of(context);
+    //bc = background color (of the label pill)
     final bc = theme.colorScheme.surface;
 
     final bool isImposter = label == 'IMPOSTER';
@@ -110,10 +113,12 @@ class _FlipCardState extends State<FlipCard>
                   horizontal: 16,
                   vertical: 10,
                 ),
+                //the pill
                 decoration: BoxDecoration(
                   color: bc,
                   borderRadius: BorderRadius.circular(999),
                 ),
+                //text revealing word/'IMPOSTER' if you are imposter
                 child: Text(
                   label,
                   textAlign: TextAlign.center,
@@ -125,6 +130,7 @@ class _FlipCardState extends State<FlipCard>
                 ),
               ),
               if (isImposter) ...[
+                //show hint if is imposter
                 const SizedBox(height: 8),
                 Text(
                   'Hint: $hint',
@@ -146,12 +152,14 @@ class _FlipCardState extends State<FlipCard>
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
+      //flipping card animation detector
       onTapDown: (details) => animationController.forward(),
       onTapUp: (details) => animationController.reverse(),
       onTapCancel: () => animationController.reverse(),
       child: AnimatedBuilder(
         animation: animationController,
         builder: (context, child) {
+          //the actual code for the animation
           final angle = animationController.value * pi;
           final isFront = angle < pi / 2;
 

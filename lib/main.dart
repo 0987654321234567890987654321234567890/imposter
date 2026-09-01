@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'player_setup_screen.dart';
 import 'about_screen.dart';
 
+//color palette
 const Color bgCharcoal = Color(0xFF1A1A1E);
 const Color surfaceWhite = Color(0xFFF4EFE3);
 const Color accentRed = Color(0xFFC4392B);
 const Color accentGreen = Color(0xFF2C6E5C);
 const Color mutedGrey = Color(0xFF8A8578);
+
 void main() {
   runApp(const MyApp());
 }
@@ -17,7 +19,9 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      //app title
       title: 'Imposter Game',
+      //theme for entire app
       theme: ThemeData(
         splashFactory: NoSplash.splashFactory,
         highlightColor: Colors.transparent,
@@ -84,7 +88,9 @@ class StartScreen extends StatelessWidget {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
+                //man with magnifying glass icon
                 const Icon(Icons.person_search, size: 90, color: mutedGrey),
+                //big imposter title text
                 const Text(
                   'IMPOSTER',
                   style: TextStyle(
@@ -95,11 +101,13 @@ class StartScreen extends StatelessWidget {
                   ),
                 ),
                 const SizedBox(height: 12),
+                //'who's lying' text
                 const Text(
                   'Who\'s lying?',
                   style: TextStyle(fontSize: 22, color: Colors.white70),
                 ),
                 const SizedBox(height: 60),
+                //play button
                 SizedBox(
                   width: 260,
                   child: ElevatedButton(
@@ -122,6 +130,7 @@ class StartScreen extends StatelessWidget {
               ],
             ),
           ),
+          //top right info button
           Positioned(
             top: 16,
             right: 16,
@@ -141,6 +150,7 @@ class StartScreen extends StatelessWidget {
 }
 
 Route _buildRoute(Widget page) {
+  //screen transitions
   return PageRouteBuilder(
     pageBuilder: (context, animation, secondaryAnimation) => page,
     transitionDuration: const Duration(milliseconds: 180),

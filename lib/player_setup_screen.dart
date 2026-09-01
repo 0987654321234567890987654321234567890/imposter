@@ -37,6 +37,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
       names.removeAt(index);
       _keys.removeAt(index);
 
+      //clamping max imposters
       final maxImposters = names.length - 2;
       if (imposterCount > maxImposters) {
         imposterCount = maxImposters < 1 ? 1 : maxImposters;
@@ -58,6 +59,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
     setState(() => _isLoading = true);
 
     try {
+      //await because it takes a moment to load
       final wordList = await loadWordList();
 
       if (!mounted) return;
@@ -65,6 +67,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
       Navigator.push(
         context,
         _buildRoute(
+          //where the game data from the player selection gets pushed
           GameScreen(
             playerNames: names,
             wordList: wordList,
@@ -74,6 +77,7 @@ class _PlayerSetupScreenState extends State<PlayerSetupScreen> {
         ),
       );
     } finally {
+      //always runs so button never loads forever
       if (mounted) setState(() => _isLoading = false);
     }
   }

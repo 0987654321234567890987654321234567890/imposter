@@ -13,11 +13,13 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //'about' text
       appBar: AppBar(title: const Text('About')),
       body: Padding(
         padding: const EdgeInsets.all(24),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
+          //imposter title
           children: [
             const Text(
               'Imposter',
@@ -28,11 +30,13 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 8),
+            //game description
             const Text(
               'A social deduction game - find the imposter before they can figure out the word!',
               style: TextStyle(fontSize: 16, color: mutedGrey),
             ),
             const SizedBox(height: 32),
+            //ko-fi link for donations
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(

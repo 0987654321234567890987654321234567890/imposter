@@ -5,6 +5,7 @@ import 'dart:math';
 import 'package:flutter/services.dart';
 import 'package:csv/csv.dart';
 
+//word list csv
 Future<List<WordEntry>> loadWordList() async {
   final rawCsv = await rootBundle.loadString(
     'lib/assets/imposter_words_v2.csv',
@@ -53,6 +54,7 @@ List<Player> generatePlayers(
 
   final isTrollRound = trollModeEnabled && random.nextInt(15) == 0;
 
+  //troll round = no imposter
   if (isTrollRound) {
     return List.generate(names.length, (i) {
       return Player(name: names[i], label: word.word, hint: '');
@@ -104,6 +106,7 @@ class _GameScreenState extends State<GameScreen> {
     widget.trollModeEnabled,
   );
 
+  //whether or not it's currently displaying '[name] starts the conversation' text. horrible naming
   bool showingPlayerStart = false;
 
   int currentIndex = 0;
@@ -113,6 +116,7 @@ class _GameScreenState extends State<GameScreen> {
   late int startingPlayer = random.nextInt(players.length);
   late String startingPlayerName = players[startingPlayer].name;
 
+  //switching to next player if not displaying playerStart screen, otherwise showing that screen
   void _nextPlayer() {
     setState(() {
       if ((turnCount + 1) % players.length == 0 && !showingPlayerStart) {
@@ -130,6 +134,7 @@ class _GameScreenState extends State<GameScreen> {
     final current = players[currentIndex];
     final currentColor = cardColors[turnCount % cardColors.length];
 
+    //button uses same variable
     String buttonText = "Next Player";
     if (showingPlayerStart) buttonText = "Revisit Words";
 
@@ -150,6 +155,7 @@ class _GameScreenState extends State<GameScreen> {
                       fit: BoxFit.scaleDown,
                       child: SizedBox(
                         width: 300,
+                        //text on top of the card
                         child: Text(
                           '${current.name}\'s turn',
                           textAlign: TextAlign.center,
@@ -159,6 +165,7 @@ class _GameScreenState extends State<GameScreen> {
                     ),
                   ),
                   const SizedBox(height: 24),
+                  //sends info about the card to flip_card_screen.dart
                   FlipCard(
                     key: ValueKey(currentIndex),
                     label: current.label,
@@ -179,6 +186,7 @@ class _GameScreenState extends State<GameScreen> {
                       fit: BoxFit.scaleDown,
                       child: SizedBox(
                         width: 300,
+                        //text of who starts the conversation
                         child: Text(
                           '$startingPlayerName starts the conversation!',
                           textAlign: TextAlign.center,
@@ -194,6 +202,8 @@ class _GameScreenState extends State<GameScreen> {
                   const SizedBox(height: 80),
                 ],
               ),
+
+            //always uses the same button
             ElevatedButton(
               onPressed: _nextPlayer,
               style: ElevatedButton.styleFrom(
