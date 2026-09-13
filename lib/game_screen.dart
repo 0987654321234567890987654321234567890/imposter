@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:imposter/main.dart';
 import 'flip_card_screen.dart';
 import 'dart:math';
 
@@ -138,6 +139,12 @@ class _GameScreenState extends State<GameScreen> {
     String buttonText = "Next Player";
     if (showingPlayerStart) buttonText = "Revisit Words";
 
+    //list of imposters
+    final imposterNames = players
+        .where((p) => p.label == 'IMPOSTER')
+        .map((p) => p.name)
+        .toList();
+
     return Scaffold(
       appBar: AppBar(title: const Text('Imposter Game')),
       body: Center(
@@ -214,9 +221,66 @@ class _GameScreenState extends State<GameScreen> {
               ),
               child: Text(buttonText, style: TextStyle(fontSize: 30)),
             ),
+
+            //reveal imposters button
+            if (showingPlayerStart) ...[
+              const SizedBox(height: 12),
+              TextButton(
+                onPressed: () =>
+                    _showImposterRevealScreen(context, imposterNames),
+                child: const Text(
+                  'Reveal Imposters',
+                  style: TextStyle(fontSize: 18),
+                ),
+              ),
+            ],
           ],
         ),
       ),
     );
   }
+}
+
+//imposter reveal screen
+void _showImposterRevealScreen(
+  BuildContext context,
+  List<String> imposterNames,
+) {
+  final textTheme = Theme.of(context).textTheme;
+
+  showDialog(
+    context: context,
+    builder: (context) => AlertDialog(
+      backgroundColor: bgCharcoal,
+
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+
+      icon: const Icon(Icons.visibility, color: accentRed, size: 32),
+
+      title: Text(
+        'Reveal!',
+        style: textTheme.titleLarge,
+        textAlign: TextAlign.center,
+      ),
+      content: Text(
+        imposterNames.isEmpty
+            ? 'There was no imposter this round... you got trolled!'
+            : 'The imposter${imposterNames.length > 1 ? 's were' : ' was'}: ${imposterNames.join(', ')}!',
+        textAlign: TextAlign.center,
+        style: textTheme.bodyLarge?.copyWith(color: Colors.white70),
+      ),
+
+      actionsAlignment: MainAxisAlignment.center,
+
+      actions: [
+        TextButton(
+          onPressed: () => Navigator.pop(context),
+          child: const Text(
+            'Close',
+            style: TextStyle(color: accentRed, fontWeight: FontWeight.bold),
+          ),
+        ),
+      ],
+    ),
+  );
 }
